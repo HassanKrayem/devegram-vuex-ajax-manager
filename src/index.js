@@ -24,10 +24,16 @@ const ajaxManager = {
   },
   mutations: {
     // used for set new service or update existing ones
-    SET_SERVICE (state, params) {
-      let c = params.config
-      state.services[params.name] = {...c}
-      state.services[params.name].path = c.url + (c.port? ':' + c.port : '') + (c.apiVer? '/' + c.apiVer : '')
+    SET_SERVICE (state, services) {
+    	if (services.constructor !== Array) {
+	      services = [services]
+	    }
+
+		services.forEach((service) => {
+			let c = service.config
+			state.services[service.name] = {...c}
+			state.services[service.name].path = c.url + (c.port? ':' + c.port : '') + (c.apiVer? '/' + c.apiVer : '')
+		})
     },
     SET_ERROR_HANDLER (state, func) {
       state.errorHandler = func
@@ -86,7 +92,7 @@ const ajaxManager = {
 
       let url = params.url
       let headers = params.headers || {};
-      const service = state.services[params.server];
+      const service = state.services[params.service];
       if (service) {
         url = service.path + url
       }
@@ -130,7 +136,8 @@ const ajaxManager = {
 
       return new Promise((resolve, reject) => {
         axios(request).then(response => {
-          resolve(response);
+			if (typeof state.successHandler === 'function') state.successHandler(response)
+			resolve(response);
         }, error => {
           if (params.hasOwnProperty('onError')) {
             params.onError(error)

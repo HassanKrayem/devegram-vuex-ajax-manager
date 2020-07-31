@@ -1,6 +1,6 @@
 {
   "name": "devegram-vuex-ajax-manager",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "description": "Devegram Vuex Ajax Manager is package for managing ajax requests via a scalable simple structure, it handles different outgoing sources, auth token, api version, and more.",
   "main": "./src/minified.js",
   "scripts": {
@@ -12,8 +12,8 @@
     "url": "git+https://github.com/HassanKrayem/vuex-ajax-manager.git"
   },
   "files": [
-  "src/minified.js"
- ],
+    "src/minified.js"
+  ],
   "keywords": [
     "ajax",
     "vue",
@@ -30,5 +30,6 @@
   "bugs": {
     "url": "https://github.com/HassanKrayem/vuex-ajax-manager/issues"
   },
-  "homepage": "https://github.com/HassanKrayem/vuex-ajax-manager#readme"
+  "homepage": "https://github.com/HassanKrayem/vuex-ajax-manager#readme",
+  "dependencies": {}
 }
